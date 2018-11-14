@@ -39,7 +39,7 @@ const swichRight = function () {
   }
 };
 
-const swichLeft = function() {
+const swichLeft = function () {
   i--;
   if (i >= 0 && i < screens.length - 1) {
     mainSection.innerHTML = ``;
