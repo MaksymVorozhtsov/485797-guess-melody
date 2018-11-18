@@ -1,35 +1,36 @@
 "use strict";
 
-let screens = [`welcome`, `game-genre`, `game-artist`, `result-success`, `fail-time`, `fail-tries`, `modal-error`, `modal-confirm`];
+const screens = [`welcome`, `game-genre`, `game-artist`, `result-success`, `fail-time`, `fail-tries`, `modal-error`, `modal-confirm`];
 
 const mainSection = document.querySelector(`.main`);
 const arrowsSection = document.querySelector(`.arrows`);
+const arrowsTemplate = document.querySelector(`.arrows__wrap`);
 
-const arrowShow = function () {
-  let arrowsToInsert = document.getElementById(`arrows`).content;
-  arrowsSection.appendChild(arrowsToInsert);
+const arrowShow = () => {
+  arrowsSection.appendChild(arrowsTemplate);
+};
+
+const Enum = {
+  RIGHT_KEYCODE: 39,
+  LEFT_KEYCODE: 37,
 };
 
 arrowShow();
 
-const RIGHT_KEYCODE = 39;
-const LEFT_KEYCODE = 37;
-const RIGHT_BTN = document.querySelector(`.arrows__btn--right`);
-const LEFT_BTN = document.querySelector(`.arrows__btn--left`);
+let RIGHT_BTN = document.querySelector(`.arrows__btn--right`);
+let LEFT_BTN = document.querySelector(`.arrows__btn--left`);
 
-const screenShow = function (id) {
+const screenShow = (id) => {
   let templateToInsert = document.getElementById(id).content;
   let newTemplate = templateToInsert.cloneNode(true);
-  let templateClone = document.createDocumentFragment();
-  templateClone.appendChild(newTemplate);
-  mainSection.appendChild(templateClone);
+  mainSection.appendChild(newTemplate);
 };
 
 screenShow(screens[0]);
 
 let i = 0;
 
-const swichRight = function () {
+const swichRight = () => {
   i++;
   if (i > 0 && i <= screens.length - 1) {
     mainSection.innerHTML = ``;
@@ -39,7 +40,7 @@ const swichRight = function () {
   }
 };
 
-const swichLeft = function () {
+const swichLeft = () => {
   i--;
   if (i >= 0 && i < screens.length - 1) {
     mainSection.innerHTML = ``;
@@ -50,9 +51,9 @@ const swichLeft = function () {
 };
 
 document.addEventListener(`keydown`, function (evt) {
-  if (evt.keyCode === RIGHT_KEYCODE) {
+  if (evt.keyCode === Enum.RIGHT_KEYCODE) {
     swichRight();
-  } else if (evt.keyCode === LEFT_KEYCODE) {
+  } else if (evt.keyCode === Enum.LEFT_KEYCODE) {
     swichLeft();
   }
 });
