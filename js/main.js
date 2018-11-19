@@ -15,10 +15,8 @@ const Enum = {
   LEFT_KEYCODE: 37,
 };
 
-arrowShow();
-
-let RIGHT_BTN = document.querySelector(`.arrows__btn--right`);
-let LEFT_BTN = document.querySelector(`.arrows__btn--left`);
+const rightBtn = document.querySelector(`.arrows__btn--right`);
+const leftBtn = document.querySelector(`.arrows__btn--left`);
 
 const screenShow = (id) => {
   let templateToInsert = document.getElementById(id).content;
@@ -58,10 +56,10 @@ document.addEventListener(`keydown`, function (evt) {
   }
 });
 
-RIGHT_BTN.addEventListener(`click`, function () {
+rightBtn.addEventListener(`click`, function () {
   swichRight();
 });
 
-LEFT_BTN.addEventListener(`click`, function () {
+leftBtn.addEventListener(`click`, function () {
   swichLeft();
 });
