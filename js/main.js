@@ -6,14 +6,12 @@ const mainSection = document.querySelector(`.main`);
 const arrowsSection = document.querySelector(`.arrows`);
 const arrowsTemplate = document.querySelector(`.arrows__wrap`);
 
-() => {
-  arrowsSection.appendChild(arrowsTemplate);
-};
-
 const Enum = {
   RIGHT_KEYCODE: 39,
   LEFT_KEYCODE: 37,
 };
+
+arrowsSection.appendChild(arrowsTemplate);
 
 const rightBtn = document.querySelector(`.arrows__btn--right`);
 const leftBtn = document.querySelector(`.arrows__btn--left`);
