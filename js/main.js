@@ -6,7 +6,7 @@ const mainSection = document.querySelector(`.main`);
 const arrowsSection = document.querySelector(`.arrows`);
 const arrowsTemplate = document.querySelector(`.arrows__wrap`);
 
-const arrowShow = () => {
+() => {
   arrowsSection.appendChild(arrowsTemplate);
 };
 
