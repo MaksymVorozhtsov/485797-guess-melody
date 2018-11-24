@@ -1,5 +1,3 @@
-"use strict";
-
 const screens = [`welcome`, `game-genre`, `game-artist`, `result-success`, `fail-time`, `fail-tries`, `modal-error`, `modal-confirm`];
 
 const mainSection = document.querySelector(`.main`);
