@@ -1,63 +1,69 @@
-"use strict";
-
-const screens = [`welcome`, `game-genre`, `game-artist`, `result-success`, `fail-time`, `fail-tries`, `modal-error`, `modal-confirm`];
+import welcomeElement from "./welcome.js";
+import gameGenreElement from "./game-genre.js";
+import gameArtistElement from "./game-artist.js";
+import resultSuccessElement from "./result-success.js";
 
 const mainSection = document.querySelector(`.main`);
-const arrowsSection = document.querySelector(`.arrows`);
-const arrowsTemplate = document.querySelector(`.arrows__wrap`);
 
-const Enum = {
-  RIGHT_KEYCODE: 39,
-  LEFT_KEYCODE: 37,
+const appendToMain = (element) => {
+  mainSection.innerHTML = ``;
+  mainSection.appendChild(element);
 };
 
-arrowsSection.appendChild(arrowsTemplate);
+appendToMain(welcomeElement);
 
-const rightBtn = document.querySelector(`.arrows__btn--right`);
-const leftBtn = document.querySelector(`.arrows__btn--left`);
-
-const screenShow = (id) => {
-  let templateToInsert = document.getElementById(id).content;
-  let newTemplate = templateToInsert.cloneNode(true);
-  mainSection.appendChild(newTemplate);
+const backButtonFunction = () => {
+  const backButton = document.querySelector(`.game__back`);
+  backButton.addEventListener(`click`, function () {
+    appendToMain(welcomeElement);
+  });
 };
 
-screenShow(screens[0]);
+const playButton = document.querySelector(`.welcome__button`);
 
-let i = 0;
+playButton.addEventListener(`click`, () => {
+  appendToMain(gameGenreElement);
+  backButtonFunction();
 
-const swichRight = () => {
-  i++;
-  if (i > 0 && i <= screens.length - 1) {
-    mainSection.innerHTML = ``;
-    screenShow(screens[i]);
-  } else {
-    i = screens.length - 1;
+  const submitButton = document.querySelector(`.game__submit`);
+  const tracksArray = document.querySelectorAll(`.game__input`);
+
+  const trackCheck = () => {
+    let checkedTracksCounter = 0;
+    for (let i = 0; i < tracksArray.length; i++) {
+      if (!tracksArray[i].checked) {
+        checkedTracksCounter++;
+      }
+    }
+    if (checkedTracksCounter === 0) {
+      submitButton.removeAttribute(`disabled`);
+    } else {
+      submitButton.setAttribute(`disabled`, true);
+    }
+  };
+
+  trackCheck();
+
+  for (let i = 0; i < tracksArray.length; i++) {
+    tracksArray[i].addEventListener(`change`, function () {
+      trackCheck();
+    });
   }
-};
 
-const swichLeft = () => {
-  i--;
-  if (i >= 0 && i < screens.length - 1) {
-    mainSection.innerHTML = ``;
-    screenShow(screens[i]);
-  } else {
-    i = 0;
-  }
-};
+  submitButton.addEventListener(`click`, () => {
+    appendToMain(gameArtistElement);
+    backButtonFunction();
 
-document.addEventListener(`keydown`, function (evt) {
-  if (evt.keyCode === Enum.RIGHT_KEYCODE) {
-    swichRight();
-  } else if (evt.keyCode === Enum.LEFT_KEYCODE) {
-    swichLeft();
-  }
-});
+    const artistBlock = document.querySelector(`.game__artist`);
 
-rightBtn.addEventListener(`click`, function () {
-  swichRight();
-});
+    artistBlock.addEventListener(`click`, () => {
+      appendToMain(resultSuccessElement);
 
-leftBtn.addEventListener(`click`, function () {
-  swichLeft();
+      const replayButton = document.querySelector(`.result__replay`);
+
+      replayButton.addEventListener(`click`, () => {
+        appendToMain(welcomeElement);
+      });
+    });
+  });
 });
