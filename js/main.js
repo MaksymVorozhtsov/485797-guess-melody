@@ -1,3 +1,7 @@
+import welcomeElement from "js/welcome.js";
+
+/*const mainSection = document.querySelector(`.main`);
+
 const screens = [`welcome`, `game-genre`, `game-artist`, `result-success`, `fail-time`, `fail-tries`, `modal-error`, `modal-confirm`];
 
 const mainSection = document.querySelector(`.main`);
@@ -59,3 +63,4 @@ rightBtn.addEventListener(`click`, function () {
 leftBtn.addEventListener(`click`, function () {
   swichLeft();
 });
+*/
