@@ -25,7 +25,7 @@ playButton.addEventListener(`click`, function () {
   backButtonFunction();
 
   const submitButton = document.querySelector(`.game__submit`);
-  submitButton.setAttribute('disabled', true);
+  submitButton.setAttribute(`disabled`, true);
 
   const track01 = document.getElementById(`answer-1`);
   const track02 = document.getElementById(`answer-2`);
@@ -38,7 +38,7 @@ playButton.addEventListener(`click`, function () {
     } else {
       submitButton.setAttribute(`disabled`, true);
     }
-  }
+  };
 
   track01.addEventListener(`click`, function () {
     trackCheck();
