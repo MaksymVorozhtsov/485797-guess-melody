@@ -30,7 +30,7 @@ playButton.addEventListener(`click`, () => {
 
   const trackCheck = () => {
     let checkedTracksCounter = 0;
-    for (let i = 0; i<tracksArray.length; i++) {
+    for (let i = 0; i < tracksArray.length; i++) {
       if (!tracksArray[i].checked) {
         checkedTracksCounter++;
       }
@@ -44,7 +44,7 @@ playButton.addEventListener(`click`, () => {
 
   trackCheck();
 
-  for (let i = 0; i<tracksArray.length; i++) {
+  for (let i = 0; i < tracksArray.length; i++) {
     tracksArray[i].addEventListener(`change`, function () {
       trackCheck();
     });
