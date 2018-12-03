@@ -25,6 +25,36 @@ playButton.addEventListener(`click`, function () {
   backButtonFunction();
 
   const submitButton = document.querySelector(`.game__submit`);
+  submitButton.setAttribute('disabled', true);
+
+  const track01 = document.getElementById(`answer-1`);
+  const track02 = document.getElementById(`answer-2`);
+  const track03 = document.getElementById(`answer-3`);
+  const track04 = document.getElementById(`answer-4`);
+
+  const trackCheck = () => {
+    if (track01.checked || track02.checked || track03.checked || track04.checked) {
+      submitButton.removeAttribute(`disabled`);
+    } else {
+      submitButton.setAttribute(`disabled`, true);
+    }
+  }
+
+  track01.addEventListener(`click`, function () {
+    trackCheck();
+  });
+
+  track02.addEventListener(`click`, function () {
+    trackCheck();
+  });
+
+  track03.addEventListener(`click`, function () {
+    trackCheck();
+  });
+
+  track04.addEventListener(`click`, function () {
+    trackCheck();
+  });
 
   submitButton.addEventListener(`click`, function () {
     appendToMain(gameArtistElement);
