@@ -26,14 +26,16 @@ playButton.addEventListener(`click`, function () {
   backButtonFunction();
 
   const submitButton = document.querySelector(`.game__submit`);
-
-  const track01 = document.getElementById(`answer-1`);
-  const track02 = document.getElementById(`answer-2`);
-  const track03 = document.getElementById(`answer-3`);
-  const track04 = document.getElementById(`answer-4`);
+  const tracksArray = document.querySelectorAll(`.game__input`);
 
   const trackCheck = () => {
-    if (track01.checked || track02.checked || track03.checked || track04.checked) {
+    let checkedTracksCounter = 0;
+    for (let i = 0; i<tracksArray.length; i++) {
+      if (!tracksArray[i].checked) {
+        checkedTracksCounter++;
+      }
+    }
+    if (checkedTracksCounter === 0) {
       submitButton.removeAttribute(`disabled`);
     } else {
       submitButton.setAttribute(`disabled`, true);
@@ -42,21 +44,11 @@ playButton.addEventListener(`click`, function () {
 
   trackCheck();
 
-  track01.addEventListener(`click`, function () {
-    trackCheck();
-  });
-
-  track02.addEventListener(`click`, function () {
-    trackCheck();
-  });
-
-  track03.addEventListener(`click`, function () {
-    trackCheck();
-  });
-
-  track04.addEventListener(`click`, function () {
-    trackCheck();
-  });
+  for (let i = 0; i<tracksArray.length; i++) {
+    tracksArray[i].addEventListener(`change`, function () {
+      trackCheck();
+    });
+  }
 
   submitButton.addEventListener(`click`, function () {
     appendToMain(gameArtistElement);
