@@ -1,7 +1,28 @@
 import welcomeElement from "js/welcome.js";
+import gameGenreElement from "js/game-genre.js";
+import gameArtistElement from "js/game-artist.js";
 
-/*const mainSection = document.querySelector(`.main`);
+const mainSection = document.querySelector(`.main`);
 
+mainSection.appendChild(welcomeElement);
+
+const playButton = document.querySelector(`.welcome__button`);
+
+playButton.addEventListener("click", function() {
+  mainSection.innerHTML = "";
+  mainSection.appendChild(gameGenreElement);
+
+  const submitButton = document.querySelector(`.game__submit`);
+
+  submitButton.addEventListener("click", function() {
+    mainSection.innerHTML = "";
+    mainSection.appendChild(gameArtistElement);
+  });
+});
+
+
+
+/*
 const screens = [`welcome`, `game-genre`, `game-artist`, `result-success`, `fail-time`, `fail-tries`, `modal-error`, `modal-confirm`];
 
 const mainSection = document.querySelector(`.main`);
