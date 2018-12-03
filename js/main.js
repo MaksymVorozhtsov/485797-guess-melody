@@ -1,15 +1,16 @@
 import welcomeElement from "js/welcome.js";
 import gameGenreElement from "js/game-genre.js";
 import gameArtistElement from "js/game-artist.js";
+import resultSuccessElement from "js/result-success.js";
 
 const mainSection = document.querySelector(`.main`);
-
-mainSection.appendChild(welcomeElement);
 
 const appendToMain = (element) => {
   mainSection.innerHTML = ``;
   mainSection.appendChild(element);
 };
+
+appendToMain(welcomeElement);
 
 const backButtonFunction = () => {
   const backButton = document.querySelector(`.game__back`);
@@ -25,7 +26,6 @@ playButton.addEventListener(`click`, function () {
   backButtonFunction();
 
   const submitButton = document.querySelector(`.game__submit`);
-  submitButton.setAttribute(`disabled`, true);
 
   const track01 = document.getElementById(`answer-1`);
   const track02 = document.getElementById(`answer-2`);
@@ -39,6 +39,8 @@ playButton.addEventListener(`click`, function () {
       submitButton.setAttribute(`disabled`, true);
     }
   };
+
+  trackCheck();
 
   track01.addEventListener(`click`, function () {
     trackCheck();
@@ -59,5 +61,17 @@ playButton.addEventListener(`click`, function () {
   submitButton.addEventListener(`click`, function () {
     appendToMain(gameArtistElement);
     backButtonFunction();
+
+    const artistBlock = document.querySelector(`.game__artist`);
+
+    artistBlock.addEventListener(`click`, function () {
+      appendToMain(resultSuccessElement);
+
+      const replayButton = document.querySelector(`.result__replay`);
+
+      replayButton.addEventListener(`click`, function () {
+        appendToMain(welcomeElement);
+      });
+    });
   });
 });
