@@ -1,4 +1,4 @@
-import getElementFromTemplate from "js/functions.js";
+import getElementFromTemplate from "./functions.js";
 
 const welcomeElement = getElementFromTemplate(`<section class="welcome">
 <div class="welcome__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>

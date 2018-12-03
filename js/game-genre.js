@@ -1,4 +1,4 @@
-import getElementFromTemplate from "js/functions.js";
+import getElementFromTemplate from "./functions.js";
 
 const gameGenreElement = getElementFromTemplate(`<section class="game game--genre">
 <header class="game__header">

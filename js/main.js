@@ -1,7 +1,7 @@
-import welcomeElement from "js/welcome.js";
-import gameGenreElement from "js/game-genre.js";
-import gameArtistElement from "js/game-artist.js";
-import resultSuccessElement from "js/result-success.js";
+import welcomeElement from "./welcome.js";
+import gameGenreElement from "./game-genre.js";
+import gameArtistElement from "./game-artist.js";
+import resultSuccessElement from "./result-success.js";
 
 const mainSection = document.querySelector(`.main`);
 
@@ -21,7 +21,7 @@ const backButtonFunction = () => {
 
 const playButton = document.querySelector(`.welcome__button`);
 
-playButton.addEventListener(`click`, function () {
+playButton.addEventListener(`click`, () => {
   appendToMain(gameGenreElement);
   backButtonFunction();
 
@@ -50,18 +50,18 @@ playButton.addEventListener(`click`, function () {
     });
   }
 
-  submitButton.addEventListener(`click`, function () {
+  submitButton.addEventListener(`click`, () => {
     appendToMain(gameArtistElement);
     backButtonFunction();
 
     const artistBlock = document.querySelector(`.game__artist`);
 
-    artistBlock.addEventListener(`click`, function () {
+    artistBlock.addEventListener(`click`, () => {
       appendToMain(resultSuccessElement);
 
       const replayButton = document.querySelector(`.result__replay`);
 
-      replayButton.addEventListener(`click`, function () {
+      replayButton.addEventListener(`click`, () => {
         appendToMain(welcomeElement);
       });
     });
