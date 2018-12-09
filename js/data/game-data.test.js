@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import gameResult from "./game-data.js";
-import userMessage from "./game-data.js";
+import {userMessage} from "./game-data.js";
 
 describe(`Game results`, () => {
   describe(`Game scoring calculation`, () => {
@@ -27,8 +27,26 @@ describe(`Game results`, () => {
   });
 
   describe(`User messages calc`, () => {
-    it(`should return message that time is up when have 0 for some answers`, () => {
+    it(`should return message that error limit when errors num is 3 and more`, () => {
+      assert.equal(userMessage(3, 0, 0), `У вас закончились все попытки. Ничего, повезёт в следующий раз!`);
+    });
+
+    it(`should return message that time is up when have 0 score or more than 0 empty answers`, () => {
       assert.equal(userMessage(0, 0, 0), `Время вышло! Вы не успели отгадать все мелодии`);
+      assert.equal(userMessage(0, 2, 0), `Время вышло! Вы не успели отгадать все мелодии`);
+    });
+
+    it(`should return message that you are on # place and you better than some percent of players`, () => {
+      assert.equal(userMessage(0, 0, 2), `Вы заняли 13 место из 14 игроков. Это лучше, чем у 7% игроков`);
+    });
+
+    it(`should return message that data is invalid when data is invalid`, () => {
+      assert.equal(userMessage(undefined, 0, 0), `Invalid data`);
+      assert.equal(userMessage(0, undefined, 0), `Invalid data`);
+      assert.equal(userMessage(0, 0, undefined), `Invalid data`);
+      assert.equal(userMessage(``, 0, 0), `Invalid data`);
+      assert.equal(userMessage(0, ``, 0), `Invalid data`);
+      assert.equal(userMessage(0, 0, ``), `Invalid data`);
     });
   });
 });

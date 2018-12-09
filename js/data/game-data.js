@@ -55,6 +55,14 @@ export default function gameResult(questionsArray, livesNum) {
 gameResult(gameQuestions, livesLeft);
 
 export function userMessage(numErrors, numNoAnswered, userScore) {
+  if (numErrors === undefined || numNoAnswered === undefined || userScore === undefined) {
+    gameMessage = `Invalid data`;
+    return gameMessage;
+  }
+  if (numErrors === `` || numNoAnswered === `` || userScore === ``) {
+    gameMessage = `Invalid data`;
+    return gameMessage;
+  }
   if (numErrors >= 3) {
     gameMessage = `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
     return gameMessage;
