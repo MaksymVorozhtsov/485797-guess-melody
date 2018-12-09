@@ -9,16 +9,21 @@ let noAnswered = 0; // number of unanswered questions, mean that user have no ti
 let gameScore = 0; // user score
 let gameMessage = ``; // message for user
 
-const gameResult = (questionsArray, livesNum) => {
+export default function gameResult(questionsArray, livesNum) {
   gameScore = 0;
   errorsCount = 0;
   noAnswered = 0;
+
+  if (livesNum === undefined || questionsArray === undefined) {
+    gameScore = -1;
+    return gameScore;
+  }
 
   if (livesNum <= 0 || livesNum > 3) {
     errorsCount = 3;
     noAnswered = 0;
     gameScore = -1;
-    return [errorsCount, noAnswered, gameScore];
+    return gameScore;
   }
 
   for (let i = 0; i < questionsArray.length; i++) {
@@ -28,7 +33,7 @@ const gameResult = (questionsArray, livesNum) => {
         errorsCount = 3;
         noAnswered = 0;
         gameScore = -1;
-        return [errorsCount, noAnswered, gameScore];
+        return gameScore;
       }
     } else if (questionsArray[i] > 0 && questionsArray[i] < 30) {
       gameScore += 2;
@@ -41,15 +46,15 @@ const gameResult = (questionsArray, livesNum) => {
 
   if (gameScore > 20) {
     gameScore = -1;
-    return [errorsCount, noAnswered, gameScore];
+    return gameScore;
   }
 
-  return [errorsCount, noAnswered, gameScore];
-};
+  return gameScore;
+}
 
 gameResult(gameQuestions, livesLeft);
 
-const userMessage = (numErrors, numNoAnswered, userScore) => {
+export function userMessage(numErrors, numNoAnswered, userScore) {
   if (numErrors >= 3) {
     gameMessage = `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
     return gameMessage;
@@ -74,6 +79,6 @@ const userMessage = (numErrors, numNoAnswered, userScore) => {
     gameMessage = `Вы заняли ${userPlace} место из ${leaderBoardUser.length} игроков. Это лучше, чем у ${userBetter}% игроков`;
     return gameMessage;
   }
-};
+}
 
 userMessage(errorsCount, noAnswered, gameScore);
