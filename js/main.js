@@ -1,7 +1,8 @@
-import welcomeElement from "./welcome.js";
-import gameGenreElement from "./game-genre.js";
-import gameArtistElement from "./game-artist.js";
-import resultSuccessElement from "./result-success.js";
+import welcomeElement from "./modules/welcome.js";
+import gameGenreElement from "./modules/game-genre.js";
+import gameArtistElement from "./modules/game-artist.js";
+import resultSuccessElement from "./modules/result-success.js";
+import headerElement from "./modules/header.js";
 
 const mainSection = document.querySelector(`.main`);
 
@@ -23,6 +24,8 @@ const playButton = document.querySelector(`.welcome__button`);
 
 playButton.addEventListener(`click`, () => {
   appendToMain(gameGenreElement);
+  const gameGenreSection = document.querySelector(`.game--genre`);
+  gameGenreSection.insertBefore(headerElement, gameGenreSection.firstChild);
   backButtonFunction();
 
   const submitButton = document.querySelector(`.game__submit`);
@@ -52,6 +55,8 @@ playButton.addEventListener(`click`, () => {
 
   submitButton.addEventListener(`click`, () => {
     appendToMain(gameArtistElement);
+    const gameArtistSection = document.querySelector(`.game--artist`);
+    gameArtistSection.insertBefore(headerElement, gameArtistSection.firstChild);
     backButtonFunction();
 
     const artistBlock = document.querySelector(`.game__artist`);

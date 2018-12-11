@@ -1,4 +1,4 @@
-import getElementFromTemplate from "./functions.js";
+import getElementFromTemplate from ".././functions/functions.js";
 
 const resultSuccessElement = getElementFromTemplate(`<section class="result">
 <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
