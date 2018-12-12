@@ -3,7 +3,7 @@ import welcomeElement from "./modules/welcome.js";
 import gameGenreTemplate from "./modules/game-genre.js";
 import gameArtistTemplate from "./modules/game-artist.js";
 import resultSuccessElement from "./modules/result-success.js";
-import headerElement from "./modules/header.js";
+import headerTemplate from "./modules/header.js";
 
 // data
 import levels from "./data/levels.js";
@@ -31,6 +31,7 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
 
   const refreshGameScreen = () => {
     appendBlock(mainSection, gameScreen);
+    const headerElement = getElementFromTemplate(headerTemplate(initialState.notes));
     gameScreen.insertBefore(headerElement, gameScreen.firstChild);
     document.querySelector(`.game__back`).addEventListener(`click`, function () {
       appendBlock(mainSection, welcomeElement);

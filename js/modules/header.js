@@ -1,6 +1,4 @@
-import getElementFromTemplate from ".././functions/functions.js";
-
-const headerElement = getElementFromTemplate(`<header class="game__header">
+const headerTemplate = (errors) => (`<header class="game__header">
 <a class="game__back" href="#">
   <span class="visually-hidden">Сыграть ещё раз</span>
   <img class="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию">
@@ -18,10 +16,10 @@ const headerElement = getElementFromTemplate(`<header class="game__header">
 </div>
 
 <div class="game__mistakes">
-  <div class="wrong"></div>
-  <div class="wrong"></div>
-  <div class="wrong"></div>
+  <div class="correct"></div>
+  <div class="correct"></div>
+  <div class="correct"></div>
 </div>
 </header>`);
 
-export default headerElement;
+export default headerTemplate;
