@@ -48,6 +48,7 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
       const replayButton = document.querySelector(`.result__replay`);
       replayButton.addEventListener(`click`, () => {
         appendBlock(mainSection, welcomeElement);
+        level = 1;
       });
     }
   }
