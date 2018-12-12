@@ -1,4 +1,4 @@
-const headerTemplate = (errors) => (`<header class="game__header">
+const headerTemplate = () => (`<header class="game__header">
 <a class="game__back" href="#">
   <span class="visually-hidden">Сыграть ещё раз</span>
   <img class="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию">
@@ -15,11 +15,36 @@ const headerTemplate = (errors) => (`<header class="game__header">
   <span class="timer__secs">00</span>
 </div>
 
-<div class="game__mistakes">
-  <div class="correct"></div>
-  <div class="correct"></div>
-  <div class="correct"></div>
-</div>
+<div class="game__mistakes-wrap"></div>
 </header>`);
 
 export default headerTemplate;
+
+export const gameMistakesTemplate = (notes) => {
+  if (notes === 3) {
+    return `<div class="game__mistakes">
+      <div class="correct"></div>
+      <div class="correct"></div>
+      <div class="correct"></div>
+    </div>`;
+  } else if (notes === 2) {
+    return `<div class="game__mistakes">
+      <div class="correct"></div>
+      <div class="correct"></div>
+      <div class="wrong"></div>
+    </div>`;
+  } else if (notes === 1) {
+    return `<div class="game__mistakes">
+      <div class="correct"></div>
+      <div class="wrong"></div>
+      <div class="wrong"></div>
+    </div>`;
+  } else {
+    notes = 0;
+    return `<div class="game__mistakes">
+      <div class="wrong"></div>
+      <div class="wrong"></div>
+      <div class="wrong"></div>
+    </div>`;
+  }
+}

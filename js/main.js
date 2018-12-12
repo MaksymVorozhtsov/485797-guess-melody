@@ -4,6 +4,7 @@ import gameGenreTemplate from "./modules/game-genre.js";
 import gameArtistTemplate from "./modules/game-artist.js";
 import resultSuccessElement from "./modules/result-success.js";
 import headerTemplate from "./modules/header.js";
+import {gameMistakesTemplate} from "./modules/header.js";
 
 // data
 import levels from "./data/levels.js";
@@ -15,6 +16,7 @@ import {appendBlock} from "./functions/functions.js";
 
 const mainSection = document.querySelector(`.main`);
 let level = initialState.level;
+let notes = initialState.notes;
 let gameScreen = ``;
 
 appendBlock(mainSection, welcomeElement);
@@ -31,8 +33,12 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
 
   const refreshGameScreen = () => {
     appendBlock(mainSection, gameScreen);
-    const headerElement = getElementFromTemplate(headerTemplate(initialState.notes));
+    const headerElement = getElementFromTemplate(headerTemplate);
     gameScreen.insertBefore(headerElement, gameScreen.firstChild);
+
+    let gameMistakesElement = getElementFromTemplate(gameMistakesTemplate(notes));
+    appendBlock(document.querySelector(`.game__mistakes-wrap`), gameMistakesElement);
+
     document.querySelector(`.game__back`).addEventListener(`click`, function () {
       appendBlock(mainSection, welcomeElement);
     });
@@ -49,7 +55,8 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
       const replayButton = document.querySelector(`.result__replay`);
       replayButton.addEventListener(`click`, () => {
         appendBlock(mainSection, welcomeElement);
-        level = 1;
+        level = initialState.level;
+        notes = initialState.notes;
       });
     }
   }

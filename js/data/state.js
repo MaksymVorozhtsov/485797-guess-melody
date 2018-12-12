@@ -4,4 +4,6 @@ const initialState = {
   time: 600
 }
 
+export const state = initialState;
+
 export default initialState;
