@@ -1,9 +1,9 @@
-import getElementFromTemplate from ".././functions/functions.js";
+import levels from ".././data/levels.js";
 
-const gameGenreElement = getElementFromTemplate(`<section class="game game--genre">
+const gameGenreTemplate = (level) => (`<section class="game game--genre">
 
 <section class="game__screen">
-  <h2 class="game__title">Выберите инди-рок треки</h2>
+  <h2 class="game__title">${levels[level-1].levelQuestion}</h2>
   <form class="game__tracks">
     <div class="track">
       <button class="track__button track__button--play" type="button"></button>
@@ -54,4 +54,4 @@ const gameGenreElement = getElementFromTemplate(`<section class="game game--genr
 </section>
 </section>`);
 
-export default gameGenreElement;
+export default gameGenreTemplate;

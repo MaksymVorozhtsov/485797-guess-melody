@@ -3,3 +3,8 @@ export default function getElementFromTemplate(element) {
   newElement.innerHTML = element;
   return newElement;
 }
+
+export const appendBlock = (section, element) => {
+  section.innerHTML = ``;
+  section.appendChild(element);
+};
