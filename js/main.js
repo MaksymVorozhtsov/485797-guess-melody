@@ -39,7 +39,7 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
     let gameMistakesElement = getElementFromTemplate(gameMistakesTemplate(notes));
     appendBlock(document.querySelector(`.game__mistakes-wrap`), gameMistakesElement);
 
-    document.querySelector(`.game__back`).addEventListener(`click`, function () {
+    document.querySelector(`.game__back`).addEventListener(`click`, () => {
       appendBlock(mainSection, welcomeElement);
     });
   }
@@ -83,12 +83,21 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
       trackCheck();
 
       for (let i = 0; i < tracksArray.length; i++) {
-        tracksArray[i].addEventListener(`change`, function () {
+        tracksArray[i].addEventListener(`change`, () => {
           trackCheck();
         });
       }
 
-      submitButton.addEventListener(`click`, function () {
+      const formElement = document.querySelector(`.game__tracks`);
+
+      formElement.addEventListener(`submit`, () => {
+        //evt.preventDefualt();
+        const formData = new FormData(formElement);
+        let obj = {};
+        formData.forEach(function(value, key) {
+          obj[key] = value;
+        });
+        console.log(obj);
         finalGameScreen();
       });
     } else {
