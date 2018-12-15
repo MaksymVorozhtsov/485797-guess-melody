@@ -22,14 +22,13 @@ let gameScreen = ``;
 appendBlock(mainSection, welcomeElement);
 
 document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
-
   const chooseGameScreen = () => {
-    if (levels[level-1].levelType === `genre`) {
+    if (levels[level - 1].levelType === `genre`) {
       gameScreen = getElementFromTemplate(gameGenreTemplate(level));
     } else {
       gameScreen = getElementFromTemplate(gameArtistTemplate(level));
     }
-  }
+  };
 
   const refreshGameScreen = () => {
     appendBlock(mainSection, gameScreen);
@@ -42,7 +41,7 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
     document.querySelector(`.game__back`).addEventListener(`click`, () => {
       appendBlock(mainSection, welcomeElement);
     });
-  }
+  };
 
   const finalGameScreen = () => {
     if (level <= 9) {
@@ -59,17 +58,17 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
         notes = initialState.notes;
       });
     }
-  }
+  };
 
   const refreshGameListeners = () => {
-    if (levels[level-1].levelType === `genre`) {
+    if (levels[level - 1].levelType === `genre`) {
       const submitButton = document.querySelector(`.game__submit`);
       const tracksArray = document.querySelectorAll(`.game__input`);
 
       const trackCheck = () => {
         let checkedTracksCounter = 0;
-        for (let i = 0; i < tracksArray.length; i++) {
-          if (tracksArray[i].checked) {
+        for (let checkbox of tracksArray) {
+          if (checkbox.checked) {
             checkedTracksCounter++;
           }
         }
@@ -82,31 +81,36 @@ document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
 
       trackCheck();
 
-      for (let i = 0; i < tracksArray.length; i++) {
-        tracksArray[i].addEventListener(`change`, () => {
+      for (let checkbox of tracksArray) {
+        checkbox.addEventListener(`change`, () => {
           trackCheck();
         });
       }
 
       const formElement = document.querySelector(`.game__tracks`);
 
-      formElement.addEventListener(`submit`, () => {
-        //evt.preventDefualt();
-        const formData = new FormData(formElement);
+      formElement.addEventListener(`submit`, (evt) => {
+        evt.preventDefault();
+        const formData = new FormData(evt.currentTarget);
         let obj = {};
-        formData.forEach(function(value, key) {
+        formData.forEach(function (value, key) {
           obj[key] = value;
         });
-        console.log(obj);
         finalGameScreen();
       });
     } else {
-      const artistBlock = document.querySelector(`.game__artist`);
-      artistBlock.addEventListener(`click`, () => {
+      const formElement = document.querySelector(`.game__artist`);
+      formElement.addEventListener(`change`, (evt) => {
+        evt.preventDefault();
+        const formData = new FormData(evt.currentTarget);
+        let obj = {};
+        formData.forEach(function (value, key) {
+          obj[key] = value;
+        });
         finalGameScreen();
       });
     }
-  }
+  };
 
   chooseGameScreen();
   refreshGameScreen();

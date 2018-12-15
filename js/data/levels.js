@@ -8,18 +8,22 @@ const levels = [
     levelAnswers: [
       {
         answerTrack: music[0].src,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerTrack: music[2].src,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-3`,
         isCorrect: true
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-4`,
         isCorrect: true
       }
     ]
@@ -33,16 +37,19 @@ const levels = [
       {
         answerName: music[2].artist,
         answerImg: music[2].image,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerName: music[1].artist,
         answerImg: music[1].image,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerName: music[0].artist,
         answerImg: music[0].image,
+        answerValue: `answer-3`,
         isCorrect: true
       }
     ]
@@ -54,18 +61,22 @@ const levels = [
     levelAnswers: [
       {
         answerTrack: music[0].src,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerTrack: music[2].src,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-3`,
         isCorrect: true
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-4`,
         isCorrect: true
       }
     ]
@@ -79,16 +90,19 @@ const levels = [
       {
         answerName: music[2].artist,
         answerImg: music[2].image,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerName: music[1].artist,
         answerImg: music[1].image,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerName: music[0].artist,
         answerImg: music[0].image,
+        answerValue: `answer-3`,
         isCorrect: true
       }
     ]
@@ -100,18 +114,22 @@ const levels = [
     levelAnswers: [
       {
         answerTrack: music[0].src,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerTrack: music[2].src,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-3`,
         isCorrect: true
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-4`,
         isCorrect: true
       }
     ]
@@ -125,16 +143,19 @@ const levels = [
       {
         answerName: music[2].artist,
         answerImg: music[2].image,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerName: music[1].artist,
         answerImg: music[1].image,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerName: music[0].artist,
         answerImg: music[0].image,
+        answerValue: `answer-3`,
         isCorrect: true
       }
     ]
@@ -146,18 +167,22 @@ const levels = [
     levelAnswers: [
       {
         answerTrack: music[0].src,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerTrack: music[2].src,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-3`,
         isCorrect: true
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-4`,
         isCorrect: true
       }
     ]
@@ -171,16 +196,19 @@ const levels = [
       {
         answerName: music[2].artist,
         answerImg: music[2].image,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerName: music[1].artist,
         answerImg: music[1].image,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerName: music[0].artist,
         answerImg: music[0].image,
+        answerValue: `answer-3`,
         isCorrect: true
       }
     ]
@@ -192,18 +220,22 @@ const levels = [
     levelAnswers: [
       {
         answerTrack: music[0].src,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerTrack: music[2].src,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-3`,
         isCorrect: true
       },
       {
         answerTrack: music[1].src,
+        answerValue: `answer-4`,
         isCorrect: true
       }
     ]
@@ -217,20 +249,23 @@ const levels = [
       {
         answerName: music[2].artist,
         answerImg: music[2].image,
+        answerValue: `answer-1`,
         isCorrect: false
       },
       {
         answerName: music[1].artist,
         answerImg: music[1].image,
+        answerValue: `answer-2`,
         isCorrect: false
       },
       {
         answerName: music[0].artist,
         answerImg: music[0].image,
+        answerValue: `answer-3`,
         isCorrect: true
       }
     ]
   }
-]
+];
 
 export default levels;
