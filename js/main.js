@@ -1,69 +1,118 @@
-import welcomeElement from "./welcome.js";
-import gameGenreElement from "./game-genre.js";
-import gameArtistElement from "./game-artist.js";
-import resultSuccessElement from "./result-success.js";
+// modules
+import welcomeElement from "./modules/welcome.js";
+import gameGenreTemplate from "./modules/game-genre.js";
+import gameArtistTemplate from "./modules/game-artist.js";
+import resultSuccessElement from "./modules/result-success.js";
+import headerTemplate from "./modules/header.js";
+import {gameMistakesTemplate} from "./modules/header.js";
+
+// data
+import levels from "./data/levels.js";
+import initialState from "./data/state.js";
+
+// functions
+import getElementFromTemplate from "./functions/functions.js";
+import {appendBlock} from "./functions/functions.js";
 
 const mainSection = document.querySelector(`.main`);
+let level = initialState.level;
+let notes = initialState.notes;
+let gameScreen = ``;
 
-const appendToMain = (element) => {
-  mainSection.innerHTML = ``;
-  mainSection.appendChild(element);
-};
+appendBlock(mainSection, welcomeElement);
 
-appendToMain(welcomeElement);
-
-const backButtonFunction = () => {
-  const backButton = document.querySelector(`.game__back`);
-  backButton.addEventListener(`click`, function () {
-    appendToMain(welcomeElement);
-  });
-};
-
-const playButton = document.querySelector(`.welcome__button`);
-
-playButton.addEventListener(`click`, () => {
-  appendToMain(gameGenreElement);
-  backButtonFunction();
-
-  const submitButton = document.querySelector(`.game__submit`);
-  const tracksArray = document.querySelectorAll(`.game__input`);
-
-  const trackCheck = () => {
-    let checkedTracksCounter = 0;
-    for (let i = 0; i < tracksArray.length; i++) {
-      if (tracksArray[i].checked) {
-        checkedTracksCounter++;
-      }
-    }
-    if (checkedTracksCounter >= 1) {
-      submitButton.removeAttribute(`disabled`);
+document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
+  const chooseGameScreen = () => {
+    if (levels[level - 1].levelType === `genre`) {
+      gameScreen = getElementFromTemplate(gameGenreTemplate(level));
     } else {
-      submitButton.setAttribute(`disabled`, true);
+      gameScreen = getElementFromTemplate(gameArtistTemplate(level));
     }
   };
 
-  trackCheck();
+  const refreshGameScreen = () => {
+    appendBlock(mainSection, gameScreen);
+    const headerElement = getElementFromTemplate(headerTemplate);
+    gameScreen.insertBefore(headerElement, gameScreen.firstChild);
 
-  for (let i = 0; i < tracksArray.length; i++) {
-    tracksArray[i].addEventListener(`change`, function () {
-      trackCheck();
+    let gameMistakesElement = getElementFromTemplate(gameMistakesTemplate(notes));
+    appendBlock(document.querySelector(`.game__mistakes-wrap`), gameMistakesElement);
+
+    document.querySelector(`.game__back`).addEventListener(`click`, () => {
+      appendBlock(mainSection, welcomeElement);
     });
-  }
+  };
 
-  submitButton.addEventListener(`click`, () => {
-    appendToMain(gameArtistElement);
-    backButtonFunction();
-
-    const artistBlock = document.querySelector(`.game__artist`);
-
-    artistBlock.addEventListener(`click`, () => {
-      appendToMain(resultSuccessElement);
-
+  const finalGameScreen = () => {
+    if (level <= 9) {
+      level = level + 1;
+      chooseGameScreen();
+      refreshGameScreen();
+      refreshGameListeners();
+    } else {
+      appendBlock(mainSection, resultSuccessElement);
       const replayButton = document.querySelector(`.result__replay`);
-
       replayButton.addEventListener(`click`, () => {
-        appendToMain(welcomeElement);
+        appendBlock(mainSection, welcomeElement);
+        level = initialState.level;
+        notes = initialState.notes;
       });
-    });
-  });
+    }
+  };
+
+  const refreshGameListeners = () => {
+    if (levels[level - 1].levelType === `genre`) {
+      const submitButton = document.querySelector(`.game__submit`);
+      const tracksArray = document.querySelectorAll(`.game__input`);
+
+      const trackCheck = () => {
+        let checkedTracksCounter = 0;
+        for (let checkbox of tracksArray) {
+          if (checkbox.checked) {
+            checkedTracksCounter++;
+          }
+        }
+        if (checkedTracksCounter >= 1) {
+          submitButton.removeAttribute(`disabled`);
+        } else {
+          submitButton.setAttribute(`disabled`, true);
+        }
+      };
+
+      trackCheck();
+
+      for (let checkbox of tracksArray) {
+        checkbox.addEventListener(`change`, () => {
+          trackCheck();
+        });
+      }
+
+      const formElement = document.querySelector(`.game__tracks`);
+
+      formElement.addEventListener(`submit`, (evt) => {
+        evt.preventDefault();
+        const formData = new FormData(evt.currentTarget);
+        let obj = {};
+        formData.forEach(function (value, key) {
+          obj[key] = value;
+        });
+        finalGameScreen();
+      });
+    } else {
+      const formElement = document.querySelector(`.game__artist`);
+      formElement.addEventListener(`change`, (evt) => {
+        evt.preventDefault();
+        const formData = new FormData(evt.currentTarget);
+        let obj = {};
+        formData.forEach(function (value, key) {
+          obj[key] = value;
+        });
+        finalGameScreen();
+      });
+    }
+  };
+
+  chooseGameScreen();
+  refreshGameScreen();
+  refreshGameListeners();
 });
