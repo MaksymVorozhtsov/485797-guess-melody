@@ -1,9 +1,6 @@
 import AbstractView from ".././classes/AbstractView";
 
 export default class WelcomeView extends AbstractView {
-  constructor () {
-    super();
-  }
   get template() {
     return (`<section class="welcome">
     <div class="welcome__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>

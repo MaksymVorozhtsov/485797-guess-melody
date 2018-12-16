@@ -1,33 +1,39 @@
 // modules
-import welcomeElement from "./modules/welcome.js";
-import gameGenreTemplate from "./modules/game-genre.js";
-import gameArtistTemplate from "./modules/game-artist.js";
-import resultSuccessElement from "./modules/result-success.js";
-import headerTemplate from "./modules/header.js";
-import {gameMistakesTemplate} from "./modules/header.js";
+import resultSuccessElement from "./modules/result-success";
+import headerTemplate from "./modules/header";
+import {gameMistakesTemplate} from "./modules/header";
 
 // data
-import levels from "./data/levels.js";
-import initialState from "./data/state.js";
+import levels from "./data/levels";
+import initialState from "./data/state";
 
 // functions
-import getElementFromTemplate from "./functions/functions.js";
-import {appendBlock} from "./functions/functions.js";
+import getElementFromTemplate from "./functions/functions";
+import {appendBlock} from "./functions/functions";
+
+// classes
+import WelcomeView from "./classes/WelcomeView";
+import GameGenre from "./classes/GameGenre";
+import GameArtist from "./classes/GameArtist";
 
 const mainSection = document.querySelector(`.main`);
 let level = initialState.level;
 let notes = initialState.notes;
 let gameScreen = ``;
 
+const welcomeTemplate = new WelcomeView();
+const welcomeElement = getElementFromTemplate(welcomeTemplate.template);
 appendBlock(mainSection, welcomeElement);
 
 // functions for Level rendering
 // function that choose what game screen to add depend of type (genre or artist)
 const chooseGameScreen = () => {
   if (levels[level - 1].levelType === `genre`) {
-    gameScreen = getElementFromTemplate(gameGenreTemplate(level));
+    const newGameGenre = new GameGenre(level);
+    gameScreen = getElementFromTemplate(newGameGenre.template);
   } else {
-    gameScreen = getElementFromTemplate(gameArtistTemplate(level));
+    const newGameArtist = new GameArtist(level);
+    gameScreen = getElementFromTemplate(newGameArtist.template);
   }
 };
 
