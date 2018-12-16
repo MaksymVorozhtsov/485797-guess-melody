@@ -37,7 +37,7 @@ const refreshHeader = () => {
   gameScreen.insertBefore(headerElement, gameScreen.firstChild);
   let gameMistakesElement = getElementFromTemplate(gameMistakesTemplate(notes));
   appendBlock(document.querySelector(`.game__mistakes-wrap`), gameMistakesElement);
-}
+};
 
 // function that refreshes game screen
 const refreshGameScreen = () => {
@@ -50,7 +50,7 @@ const refreshGameScreen = () => {
 
 // function that check - do we have more levels
 const finalGameScreen = () => {
-  if (level <= levels.length-1) {
+  if (level <= levels.length - 1) {
     level = level + 1;
     chooseGameScreen();
     refreshGameScreen();
