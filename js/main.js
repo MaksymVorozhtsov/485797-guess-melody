@@ -21,97 +21,106 @@ let gameScreen = ``;
 
 appendBlock(mainSection, welcomeElement);
 
-document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
-  const chooseGameScreen = () => {
-    if (levels[level - 1].levelType === `genre`) {
-      gameScreen = getElementFromTemplate(gameGenreTemplate(level));
-    } else {
-      gameScreen = getElementFromTemplate(gameArtistTemplate(level));
-    }
-  };
+// functions for Level rendering
+// function that choose what game screen to add depend of type (genre or artist)
+const chooseGameScreen = () => {
+  if (levels[level - 1].levelType === `genre`) {
+    gameScreen = getElementFromTemplate(gameGenreTemplate(level));
+  } else {
+    gameScreen = getElementFromTemplate(gameArtistTemplate(level));
+  }
+};
 
-  const refreshGameScreen = () => {
-    appendBlock(mainSection, gameScreen);
-    const headerElement = getElementFromTemplate(headerTemplate);
-    gameScreen.insertBefore(headerElement, gameScreen.firstChild);
+// function that refresh header depends of notes number
+const refreshHeader = () => {
+  const headerElement = getElementFromTemplate(headerTemplate);
+  gameScreen.insertBefore(headerElement, gameScreen.firstChild);
+  let gameMistakesElement = getElementFromTemplate(gameMistakesTemplate(notes));
+  appendBlock(document.querySelector(`.game__mistakes-wrap`), gameMistakesElement);
+}
 
-    let gameMistakesElement = getElementFromTemplate(gameMistakesTemplate(notes));
-    appendBlock(document.querySelector(`.game__mistakes-wrap`), gameMistakesElement);
+// function that refreshes game screen
+const refreshGameScreen = () => {
+  appendBlock(mainSection, gameScreen);
+  refreshHeader();
+  document.querySelector(`.game__back`).addEventListener(`click`, () => {
+    appendBlock(mainSection, welcomeElement);
+  });
+};
 
-    document.querySelector(`.game__back`).addEventListener(`click`, () => {
+// function that check - do we have more levels
+const finalGameScreen = () => {
+  if (level <= levels.length-1) {
+    level = level + 1;
+    chooseGameScreen();
+    refreshGameScreen();
+    refreshGameListeners();
+  } else {
+    appendBlock(mainSection, resultSuccessElement);
+    const replayButton = document.querySelector(`.result__replay`);
+    replayButton.addEventListener(`click`, () => {
       appendBlock(mainSection, welcomeElement);
+      level = initialState.level;
+      notes = initialState.notes;
     });
-  };
+  }
+};
 
-  const finalGameScreen = () => {
-    if (level <= 9) {
-      level = level + 1;
-      chooseGameScreen();
-      refreshGameScreen();
-      refreshGameListeners();
-    } else {
-      appendBlock(mainSection, resultSuccessElement);
-      const replayButton = document.querySelector(`.result__replay`);
-      replayButton.addEventListener(`click`, () => {
-        appendBlock(mainSection, welcomeElement);
-        level = initialState.level;
-        notes = initialState.notes;
-      });
-    }
-  };
+// function that change document listeners depends on type of level (genre or artist)
+const refreshGameListeners = () => {
+  if (levels[level - 1].levelType === `genre`) {
+    const submitButton = document.querySelector(`.game__submit`);
+    const tracksArray = document.querySelectorAll(`.game__input`);
 
-  const refreshGameListeners = () => {
-    if (levels[level - 1].levelType === `genre`) {
-      const submitButton = document.querySelector(`.game__submit`);
-      const tracksArray = document.querySelectorAll(`.game__input`);
-
-      const trackCheck = () => {
-        let checkedTracksCounter = 0;
-        for (let checkbox of tracksArray) {
-          if (checkbox.checked) {
-            checkedTracksCounter++;
-          }
-        }
-        if (checkedTracksCounter >= 1) {
-          submitButton.removeAttribute(`disabled`);
-        } else {
-          submitButton.setAttribute(`disabled`, true);
-        }
-      };
-
-      trackCheck();
-
+    const trackCheck = () => {
+      let checkedTracksCounter = 0;
       for (let checkbox of tracksArray) {
-        checkbox.addEventListener(`change`, () => {
-          trackCheck();
-        });
+        if (checkbox.checked) {
+          checkedTracksCounter++;
+        }
       }
+      if (checkedTracksCounter >= 1) {
+        submitButton.removeAttribute(`disabled`);
+      } else {
+        submitButton.setAttribute(`disabled`, true);
+      }
+    };
 
-      const formElement = document.querySelector(`.game__tracks`);
+    trackCheck();
 
-      formElement.addEventListener(`submit`, (evt) => {
-        evt.preventDefault();
-        const formData = new FormData(evt.currentTarget);
-        let obj = {};
-        formData.forEach(function (value, key) {
-          obj[key] = value;
-        });
-        finalGameScreen();
-      });
-    } else {
-      const formElement = document.querySelector(`.game__artist`);
-      formElement.addEventListener(`change`, (evt) => {
-        evt.preventDefault();
-        const formData = new FormData(evt.currentTarget);
-        let obj = {};
-        formData.forEach(function (value, key) {
-          obj[key] = value;
-        });
-        finalGameScreen();
+    for (let checkbox of tracksArray) {
+      checkbox.addEventListener(`change`, () => {
+        trackCheck();
       });
     }
-  };
 
+    const formElement = document.querySelector(`.game__tracks`);
+
+    formElement.addEventListener(`submit`, (evt) => {
+      evt.preventDefault();
+      const formData = new FormData(evt.currentTarget);
+      let obj = {};
+      formData.forEach(function (value, key) {
+        obj[key] = value;
+      });
+      finalGameScreen();
+    });
+  } else {
+    const formElement = document.querySelector(`.game__artist`);
+    formElement.addEventListener(`change`, (evt) => {
+      evt.preventDefault();
+      const formData = new FormData(evt.currentTarget);
+      let obj = {};
+      formData.forEach(function (value, key) {
+        obj[key] = value;
+      });
+      finalGameScreen();
+    });
+  }
+};
+
+// main game function
+document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
   chooseGameScreen();
   refreshGameScreen();
   refreshGameListeners();
