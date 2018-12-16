@@ -8,7 +8,9 @@ const gameGenreTemplate = (level) => (`<section class="game game--genre">
     <div class="track">
       <button class="track__button track__button--play" type="button"></button>
       <div class="track__status">
-        <audio></audio>
+        <audio>
+          <source src="${levels[level - 1].levelAnswers[0].answerTrack}" type="audio/mpeg">
+        </audio>
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="level-${levels[level - 1].levelNumber}-${levels[level - 1].levelAnswers[0].answerValue}" value="answer-1" id="answer-1">
@@ -19,7 +21,9 @@ const gameGenreTemplate = (level) => (`<section class="game game--genre">
     <div class="track">
       <button class="track__button track__button--play" type="button"></button>
       <div class="track__status">
-        <audio></audio>
+        <audio>
+          <source src="${levels[level - 1].levelAnswers[1].answerTrack}" type="audio/mpeg">
+        </audio>
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="level-${levels[level - 1].levelNumber}-${levels[level - 1].levelAnswers[1].answerValue}" value="answer-2" id="answer-2">
@@ -30,7 +34,9 @@ const gameGenreTemplate = (level) => (`<section class="game game--genre">
     <div class="track">
       <button class="track__button track__button--pause" type="button"></button>
       <div class="track__status">
-        <audio></audio>
+        <audio>
+          <source src="${levels[level - 1].levelAnswers[2].answerTrack}" type="audio/mpeg">
+        </audio>
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="level-${levels[level - 1].levelNumber}-${levels[level - 1].levelAnswers[2].answerValue}" value="answer-3" id="answer-3">
@@ -41,7 +47,9 @@ const gameGenreTemplate = (level) => (`<section class="game game--genre">
     <div class="track">
       <button class="track__button track__button--play" type="button"></button>
       <div class="track__status">
-        <audio></audio>
+        <audio>
+          <source src="${levels[level - 1].levelAnswers[3].answerTrack}" type="audio/mpeg">
+        </audio>
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="level-${levels[level - 1].levelNumber}-${levels[level - 1].levelAnswers[3].answerValue}" value="answer-4" id="answer-4">

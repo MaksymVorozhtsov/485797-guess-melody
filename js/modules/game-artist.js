@@ -6,7 +6,9 @@ const gameArtistTemplate = (level) => (`<section class="game game--artist">
   <h2 class="game__title">${levels[level - 1].levelQuestion}</h2>
   <div class="game__track">
     <button class="track__button track__button--play" type="button"></button>
-    <audio></audio>
+    <audio>
+      <source src="${levels[level - 1].levelTrack}" type="audio/mpeg">
+    </audio>
   </div>
 
   <form class="game__artist">
