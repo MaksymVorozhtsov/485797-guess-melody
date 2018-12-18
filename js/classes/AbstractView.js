@@ -5,11 +5,22 @@ export default class AbstractView {
     }
   }
 
+  render() {
+    return render(this.template);
+  }
+
+  get element() {
+    if (this._element) {
+      return this._element;
+    }
+    this._element = this.render();
+    this.bind(this._element);
+    return this._element;
+  }
+
   get template() {
     throw new Error(`Template is required`);
   }
-
-  render() {}
 
   bind() {}
 }

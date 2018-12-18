@@ -22,7 +22,7 @@ let notes = initialState.notes;
 let gameScreen = ``;
 
 const welcomeTemplate = new WelcomeView();
-const welcomeElement = getElementFromTemplate(welcomeTemplate.template);
+const welcomeElement = getElementFromTemplate(welcomeTemplate.render);
 appendBlock(mainSection, welcomeElement);
 
 // functions for Level rendering
@@ -30,10 +30,10 @@ appendBlock(mainSection, welcomeElement);
 const chooseGameScreen = () => {
   if (levels[level - 1].levelType === `genre`) {
     const newGameGenre = new GameGenre(level);
-    gameScreen = getElementFromTemplate(newGameGenre.template);
+    gameScreen = getElementFromTemplate(newGameGenre.render);
   } else {
     const newGameArtist = new GameArtist(level);
-    gameScreen = getElementFromTemplate(newGameArtist.template);
+    gameScreen = getElementFromTemplate(newGameArtist.render);
   }
 };
 

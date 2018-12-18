@@ -7,8 +7,8 @@ export default class GameGenre extends AbstractView {
     this.level = level;
   }
 
-  get template() {
-    return (`<section class="game game--genre">
+  get render() {
+    return `<section class="game game--genre">
       <section class="game__screen">
         <h2 class="game__title">${levels[this.level - 1].levelQuestion}</h2>
         <form class="game__tracks">
@@ -67,6 +67,16 @@ export default class GameGenre extends AbstractView {
           <button class="game__submit button" type="submit">Ответить</button>
         </form>
       </section>
-    </section>`);
+    </section>`;
+  }
+
+  get element() {
+    if (this._element) {
+      return this._element;
+    }
+    this._element = document.createElement(`div`);
+    this._element.innerHTML = this.render();
+    this.bind();
+    return this._element;
   }
 }

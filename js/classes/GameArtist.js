@@ -7,8 +7,8 @@ export default class GameArtist extends AbstractView {
     this.level = level;
   }
 
-  get template() {
-    return (`<section class="game game--artist">
+  get render() {
+    return `<section class="game game--artist">
       <section class="game__screen">
         <h2 class="game__title">${levels[this.level - 1].levelQuestion}</h2>
         <div class="game__track">
@@ -44,6 +44,16 @@ export default class GameArtist extends AbstractView {
           </div>
         </form>
       </section>
-    </section>`);
+    </section>`;
+  }
+
+  get element() {
+    if (this._element) {
+      return this._element;
+    }
+    this._element = document.createElement(`div`);
+    this._element.innerHTML = this.render();
+    this.bind();
+    return this._element;
   }
 }
