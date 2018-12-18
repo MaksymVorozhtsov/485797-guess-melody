@@ -7,7 +7,7 @@ export default class GameGenre extends AbstractView {
     this.level = level;
   }
 
-  get render() {
+  render() {
     return `<section class="game game--genre">
       <section class="game__screen">
         <h2 class="game__title">${levels[this.level - 1].levelQuestion}</h2>

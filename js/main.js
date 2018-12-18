@@ -21,19 +21,18 @@ let level = initialState.level;
 let notes = initialState.notes;
 let gameScreen = ``;
 
-const welcomeTemplate = new WelcomeView();
-const welcomeElement = getElementFromTemplate(welcomeTemplate.render);
-appendBlock(mainSection, welcomeElement);
+const welcome = new WelcomeView();
+appendBlock(mainSection, welcome.element);
 
 // functions for Level rendering
 // function that choose what game screen to add depend of type (genre or artist)
 const chooseGameScreen = () => {
   if (levels[level - 1].levelType === `genre`) {
     const newGameGenre = new GameGenre(level);
-    gameScreen = getElementFromTemplate(newGameGenre.render);
+    gameScreen = newGameGenre.element;
   } else {
     const newGameArtist = new GameArtist(level);
-    gameScreen = getElementFromTemplate(newGameArtist.render);
+    gameScreen = newGameArtist.element;
   }
 };
 
@@ -50,7 +49,7 @@ const refreshGameScreen = () => {
   appendBlock(mainSection, gameScreen);
   refreshHeader();
   document.querySelector(`.game__back`).addEventListener(`click`, () => {
-    appendBlock(mainSection, welcomeElement);
+    appendBlock(mainSection, welcome.element);
   });
 };
 
@@ -65,7 +64,7 @@ const finalGameScreen = () => {
     appendBlock(mainSection, resultSuccessElement);
     const replayButton = document.querySelector(`.result__replay`);
     replayButton.addEventListener(`click`, () => {
-      appendBlock(mainSection, welcomeElement);
+      appendBlock(mainSection, welcome.element);
       level = initialState.level;
       notes = initialState.notes;
     });
