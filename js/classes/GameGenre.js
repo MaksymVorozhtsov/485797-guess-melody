@@ -70,6 +70,10 @@ export default class GameGenre extends AbstractView {
     </section>`;
   }
 
+  bind() {
+
+  }
+
   get element() {
     if (this._element) {
       return this._element;

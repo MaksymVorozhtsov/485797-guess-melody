@@ -47,6 +47,10 @@ export default class GameArtist extends AbstractView {
     </section>`;
   }
 
+  bind() {
+
+  }
+
   get element() {
     if (this._element) {
       return this._element;
