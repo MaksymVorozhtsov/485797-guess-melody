@@ -105,17 +105,7 @@ export default class GameGenre extends AbstractView {
       formData.forEach(function (value, key) {
         obj[key] = value;
       });
-      finalGameScreen();
+      // finalGameScreen();
     });
-  }
-
-  get element() {
-    if (this._element) {
-      return this._element;
-    }
-    this._element = document.createElement(`div`);
-    this._element.innerHTML = this.render();
-    this.bind();
-    return this._element;
   }
 }

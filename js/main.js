@@ -46,6 +46,7 @@ const refreshHeader = () => {
 
 // function that refreshes game screen
 const refreshGameScreen = () => {
+  chooseGameScreen();
   appendBlock(mainSection, gameScreen);
   refreshHeader();
   document.querySelector(`.game__back`).addEventListener(`click`, () => {
@@ -126,7 +127,6 @@ const refreshGameListeners = () => {
 
 // main game function
 document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
-  chooseGameScreen();
   refreshGameScreen();
   refreshGameListeners();
 });
