@@ -52,56 +52,9 @@ const refreshGameScreen = () => {
   document.querySelector(`.game__back`).addEventListener(`click`, () => {
     appendBlock(mainSection, welcome.element);
   });
-};
 
-// function that check - do we have more levels
-const finalGameScreen = () => {
-  if (level <= levels.length - 1) {
-    level = level + 1;
-    chooseGameScreen();
-    refreshGameScreen();
-    refreshGameListeners();
-  } else {
-    appendBlock(mainSection, resultSuccessElement);
-    const replayButton = document.querySelector(`.result__replay`);
-    replayButton.addEventListener(`click`, () => {
-      appendBlock(mainSection, welcome.element);
-      level = initialState.level;
-      notes = initialState.notes;
-    });
-  }
-};
-
-// function that change document listeners depends on type of level (genre or artist)
-const refreshGameListeners = () => {
   if (levels[level - 1].levelType === `genre`) {
-    const submitButton = document.querySelector(`.game__submit`);
-    const tracksArray = document.querySelectorAll(`.game__input`);
-
-    const trackCheck = () => {
-      let checkedTracksCounter = 0;
-      for (let checkbox of tracksArray) {
-        if (checkbox.checked) {
-          checkedTracksCounter++;
-        }
-      }
-      if (checkedTracksCounter >= 1) {
-        submitButton.removeAttribute(`disabled`);
-      } else {
-        submitButton.setAttribute(`disabled`, true);
-      }
-    };
-
-    trackCheck();
-
-    for (let checkbox of tracksArray) {
-      checkbox.addEventListener(`change`, () => {
-        trackCheck();
-      });
-    }
-
     const formElement = document.querySelector(`.game__tracks`);
-
     formElement.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
       const formData = new FormData(evt.currentTarget);
@@ -125,8 +78,23 @@ const refreshGameListeners = () => {
   }
 };
 
+// function that check - do we have more levels
+const finalGameScreen = () => {
+  if (level <= levels.length - 1) {
+    level = level + 1;
+    refreshGameScreen();
+  } else {
+    appendBlock(mainSection, resultSuccessElement);
+    const replayButton = document.querySelector(`.result__replay`);
+    replayButton.addEventListener(`click`, () => {
+      appendBlock(mainSection, welcome.element);
+      level = initialState.level;
+      notes = initialState.notes;
+    });
+  }
+};
+
 // main game function
 document.querySelector(`.welcome__button`).addEventListener(`click`, () => {
   refreshGameScreen();
-  refreshGameListeners();
 });

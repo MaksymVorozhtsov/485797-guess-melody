@@ -46,17 +46,4 @@ export default class GameArtist extends AbstractView {
       </section>
     </section>`;
   }
-
-  bind() {
-    const formElement = this._element.querySelector(`.game__artist`);
-    formElement.addEventListener(`change`, (evt) => {
-      evt.preventDefault();
-      const formData = new FormData(evt.currentTarget);
-      let obj = {};
-      formData.forEach(function (value, key) {
-        obj[key] = value;
-      });
-      // finalGameScreen();
-    });
-  }
 }

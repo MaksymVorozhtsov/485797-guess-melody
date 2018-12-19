@@ -95,17 +95,5 @@ export default class GameGenre extends AbstractView {
         trackCheck();
       });
     }
-
-    const formElement = this._element.querySelector(`.game__tracks`);
-
-    formElement.addEventListener(`submit`, (evt) => {
-      evt.preventDefault();
-      const formData = new FormData(evt.currentTarget);
-      let obj = {};
-      formData.forEach(function (value, key) {
-        obj[key] = value;
-      });
-      // finalGameScreen();
-    });
   }
 }
