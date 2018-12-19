@@ -11,6 +11,7 @@ export default class GameArtist extends AbstractView {
     return `<section class="game game--artist">
       <section class="game__screen">
         <h2 class="game__title">${levels[this.level - 1].levelQuestion}</h2>
+
         <div class="game__track">
           <button class="track__button track__button--play" type="button"></button>
           <audio>
@@ -19,29 +20,16 @@ export default class GameArtist extends AbstractView {
         </div>
 
         <form class="game__artist">
-          <div class="artist">
-            <input class="artist__input visually-hidden" type="radio" name="level-${levels[this.level - 1].levelNumber}-${levels[this.level - 1].levelAnswers[0].answerValue}" value="artist-1" id="answer-1">
+
+        ${levels[this.level - 1].levelAnswers.map(answer =>
+          `<div class="artist">
+            <input class="artist__input visually-hidden" type="radio" name="${answer.answerValue}" value="${answer.answerValue}" id="${answer.answerValue}">
             <label class="artist__name" for="answer-1">
-              <img class="artist__picture" src="${levels[this.level - 1].levelAnswers[0].answerImg}" alt="Пелагея">
-              ${levels[this.level - 1].levelAnswers[0].answerName}
+              <img class="artist__picture" src="${answer.answerImg}" alt="Пелагея">
+              ${answer.answerName}
             </label>
-          </div>
+          </div>`)}
 
-          <div class="artist">
-            <input class="artist__input visually-hidden" type="radio" name="level-${levels[this.level - 1].levelNumber}-${levels[this.level - 1].levelAnswers[1].answerValue}" value="artist-2" id="answer-2">
-            <label class="artist__name" for="answer-2">
-              <img class="artist__picture" src="${levels[this.level - 1].levelAnswers[1].answerImg}" alt="Пелагея">
-              ${levels[this.level - 1].levelAnswers[1].answerName}
-            </label>
-          </div>
-
-          <div class="artist">
-            <input class="artist__input visually-hidden" type="radio" name="level-${levels[this.level - 1].levelNumber}-${levels[this.level - 1].levelAnswers[2].answerValue}" value="artist-3" id="answer-3">
-            <label class="artist__name" for="answer-3">
-              <img class="artist__picture" src="${levels[this.level - 1].levelAnswers[2].answerImg}" alt="Пелагея">
-              ${levels[this.level - 1].levelAnswers[2].answerName}
-            </label>
-          </div>
         </form>
       </section>
     </section>`;
