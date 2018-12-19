@@ -21,8 +21,7 @@ export default class GameArtist extends AbstractView {
 
         <form class="game__artist">
 
-        ${levels[this.level - 1].levelAnswers.map(answer =>
-          `<div class="artist">
+        ${levels[this.level - 1].levelAnswers.map((answer) => `<div class="artist">
             <input class="artist__input visually-hidden" type="radio" name="${answer.answerValue}" value="${answer.answerValue}" id="${answer.answerValue}">
             <label class="artist__name" for="answer-1">
               <img class="artist__picture" src="${answer.answerImg}" alt="Пелагея">

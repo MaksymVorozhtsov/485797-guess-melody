@@ -13,8 +13,7 @@ export default class GameGenre extends AbstractView {
       <h2 class="game__title">${levels[this.level - 1].levelQuestion}</h2>
       <form class="game__tracks">
 
-        ${levels[this.level - 1].levelAnswers.map(answer =>
-        `<div class="track">
+        ${levels[this.level - 1].levelAnswers.map((answer) => `<div class="track">
           <button class="track__button track__button--play" type="button"></button>
           <div class="track__status">
             <audio>
