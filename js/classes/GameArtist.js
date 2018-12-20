@@ -13,7 +13,7 @@ export default class GameArtist extends AbstractView {
         <h2 class="game__title">${levels[this.level - 1].levelQuestion}</h2>
 
         <div class="game__track">
-          <button class="track__button track__button--play" type="button"></button>
+          <button class="track__button track__button--pause" type="button"></button>
           <audio>
             <source src="${levels[this.level - 1].levelTrack}" type="audio/mpeg">
           </audio>
@@ -32,5 +32,31 @@ export default class GameArtist extends AbstractView {
         </form>
       </section>
     </section>`;
+  }
+
+  bind() {
+    const levelTrack = new Audio(`${levels[this.level - 1].levelTrack}`);
+    const playButton = this._element.querySelector(`.track__button`);
+
+    const setPause = () => {
+      playButton.addEventListener(`click`, () => {
+        levelTrack.pause();
+        playButton.classList.remove(`track__button--pause`);
+        playButton.classList.add(`track__button--play`);
+        setPlay();
+      });
+    }
+
+    const setPlay = () => {
+      playButton.addEventListener(`click`, () => {
+        levelTrack.play();
+        playButton.classList.remove(`track__button--play`);
+        playButton.classList.add(`track__button--pause`);
+        setPause();
+      });
+    }
+
+    levelTrack.play();
+    setPause();
   }
 }
